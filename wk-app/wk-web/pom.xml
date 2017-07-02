@@ -80,7 +80,7 @@
                 <version>${jetty-version}</version>
                 <configuration>
                     <httpConnector>
-                        <port>8080</port>
+                        <port>83</port>
                     </httpConnector>
                     <stopKey>shutdown</stopKey>
                     <stopPort>9966</stopPort>
@@ -106,6 +106,25 @@
                         <logCookies>true</logCookies>
                     </requestLog>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>start-jetty</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                        <configuration>
+                            <scanIntervalSeconds>0</scanIntervalSeconds>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-jetty</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
